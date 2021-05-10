@@ -15,12 +15,6 @@ wd = "C:\\Users\\apsiv\\Documents\\GitHub\\Predicting-CPU-Performance"
 os.chdir(wd)
 from CustomFuncs_CPU import get_models, train_single_model, residual_plot, predicted_vs_actual
 
-# def get_bins_pipeline(model, num_bins, strat):
-#     ct = ColumnTransformer(transformers=[("Bins", KBinsDiscretizer(n_bins=num_bins, encode='ordinal', strategy=strat), [0])])
-#     result = Pipeline(steps=[("transform", ct),  
-#                              ("model", model)])
-#     return result
-
 def fit_test_pipeline_KBins(X_train, y_train, model, ct):
     pipe = Pipeline(steps=[("transform", ct),  
                            ("model", model)])
@@ -79,22 +73,3 @@ def train_multiple_models_2(X, y, ct):
     plt.title("Model comparison")
     plt.ylabel("Neg MSE")
     plt.show() 
-  
-# randomised grid search
-# 10-fold cross-validation
-# negative mean squared error
-# def grid_search(X, y, model, grid):
-#     X_transformer = create_X_transformer()
-#     ReplaceOutliers = FunctionTransformer(func=replace_outliers_1d)
-#     pipe = Pipeline(steps=[("transform", X_transformer), 
-#                            ("ReplaceOutliers", ReplaceOutliers),
-#                            ("model", model)])
-    
-#     # Random search of parameters, using 10-fold cross validation, 
-#     # search across 10 different combinations
-#     search = GridSearchCV(estimator=pipe, 
-#                           param_grid=grid, 
-#                           cv=KFold(n_splits=10),
-#                           scoring="neg_mean_squared_error",
-#                           verbose=0).fit(X, y)
-#     return search.best_params_, search.best_score_

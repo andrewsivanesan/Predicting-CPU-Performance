@@ -3,7 +3,11 @@ Author - Andrew Sivanesan
 
 Machine learning models for predicting CPU performance.
 
-Uses the following custom module: CustomFuncs_CPU_KBins.py
+Applies k-bins discretisation to the PRP variable
+
+No improvement on model 2 from PredictingCPUPerformance.py
+
+Custom modules used: CustomFuncs_CPU_KBins.py
 
 """
 import os
@@ -53,4 +57,3 @@ train_multiple_models_2(X_train, y_train, ct)
 # AdaBoost regressor still most performant model (6 k-means bins on PRP)
 test_model_KBins(X_train, y_train, X_test, y_test, ABR_3, ct)
 # MSE of 3,078 (worse than model 2 in PredictingCPUPerformance.py)
-

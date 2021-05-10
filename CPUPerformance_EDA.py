@@ -8,34 +8,6 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
-
-######################
-### Problem definition
-######################
-
-# The aim of this project is to predict the estimated relative performance (ERP) 
-# of central processing units (CPUs) using CPU performance attributes
-
-# Such a model will allow users to assess the accuracy of manufacturers' 
-# official relative performance claims and hence make more informed purchasing decisions.
-
-# The data is sourced from https://archive.ics.uci.edu/ml/datasets/Computer+Hardware
-
-# ERP is a continuous variable, so this is a regression problem. 
-# Therefore the following models will be explored in this project:
-    # - linear regression
-    # - k-nearest neighbours regressor
-    # - support vector regression
-    # - decision tree regressor
-    # - random forest regressor
-    # - stepwise regression
-    # - Theil-Sen regression
-    # - Huber regression
-    # - RANSAC regression
-    
-# Performance will be measured using mean squared error, and benchmarked against
-# the performance of a naive mean prediction model (MSE of 23,835).
 
 ###########################
 # Exploratory data analysis
@@ -60,11 +32,9 @@ df_summary = df.describe()
 dups = df.duplicated()
 # no duplicates
 
-
 #########################
 ### Continuous variables
 ##########################
-# FixMe - split this section out into separate script
 
 discrete_cols = df.select_dtypes(include=['object', 'bool']).columns
 numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns

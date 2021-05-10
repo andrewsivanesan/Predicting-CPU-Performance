@@ -3,7 +3,17 @@ Author - Andrew Sivanesan
 
 Machine learning models for predicting CPU performance.
 
-Uses the following custom module: CustomFuncs_CPU.py
+Univariate model - use published relative performance (PRP) to predict 
+                   estimated relative performance (ERP)
+                   
+Best performing model - AdaBoost regressor (6 estimators, learning rate = 0.6)
+                      - MSE = 2,714 i.e. predictions are within +/- 52 ERP units on average
+                      - Strong negative correlation between actual ERP and residuals
+                      - Systematically under-predicting ERP
+                      - Performance being dragged down by one really poor prediction
+                      - Vast majority of predictions within +/- 50 units of ERP
+                      
+Custom modules used: CustomFuncs_CPU.py
 
 """
 
@@ -97,6 +107,3 @@ test_model(X_train, y_train, X_test, y_test, ABR_2)
 # Systematically under-predicting ERP
 # Performance being dragged down by one really poor prediction
 # vast majority of predictions within +/- 50 units of ERP
-
-### Feature engineering
-# Could try discretising the PRP variable (KBinsDiscretizer)

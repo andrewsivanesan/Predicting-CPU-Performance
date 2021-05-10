@@ -2,9 +2,10 @@
 Author - Andrew Sivanesan
 
 Custom functions for use in CPU machine learning project
+
+Used in PredictingCPUPerformance.py
 """
 import numpy as np
-#import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold, cross_val_score, GridSearchCV
@@ -14,9 +15,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LinearRegression, HuberRegressor, RANSACRegressor, TheilSenRegressor, Ridge
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, BaggingRegressor, GradientBoostingRegressor
-from sklearn.neighbors import KNeighborsRegressor, LocalOutlierFactor
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
-#from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.metrics import mean_squared_error
 
 # define models to compare
@@ -76,15 +76,6 @@ def replace_outliers_1d(X):
     result[ix] = np.median(X)
     return result
 
-# def remove_outliers(X):
-#     # identify outliers in X
-#     lof = LocalOutlierFactor()
-#     yhat = lof.fit_predict(X)
-#     # filter for all rows in X that are not outliers
-#     mask = yhat != -1
-#     result = X[mask, :]
-#     return result
-
 def fit_test_pipeline(X_train, y_train, model):
     X_transformer = create_X_transformer()
     ReplaceOutliers = FunctionTransformer(func=replace_outliers_1d)
@@ -97,13 +88,6 @@ def fit_test_pipeline_KBins(X_train, y_train, model, bins, strat):
     pipe = get_bins_pipeline(model, bins, strat)
     result = pipe.fit(X_train, y_train)
     return result
-
-# no outlier replacement
-# def fit_test_pipeline2(X, y, model):
-#     X_transformer = create_X_transformer2()
-#     result = Pipeline(steps=[("transform", X_transformer), 
-#                              ("model", model)]).fit(X, y)
-#     return result
 
 # Note: assumes 1D input
 # column name hard-coded
@@ -194,36 +178,8 @@ def test_model_KBins(X_train, y_train, X_test, y_test, model, bins, strat):
     print(mean_squared_error(y_test, y_pred))
     residual_plot(y_test, y_pred)
     predicted_vs_actual(y_test, y_pred)
-  
-# no outlier replacement
-# def test_model2(X_train, y_train, X_test, y_test, model):
-#     # fit the pipeline to the training set
-#     pipeline_test = fit_test_pipeline2(X_train, y_train, model)
-#     y_pred = pipeline_test.predict(X_test)
-#     print(mean_squared_error(y_test, y_pred))
-#     residual_plot(y_test, y_pred)
-#     predicted_vs_actual(y_test, y_pred)
-    
-# def evaluate_k(X_train, y_train, k_values):
-#     # initialise results list
-#     results = []
-#     for k in k_values:
-#         model = KNeighborsRegressor(n_neighbors=k)
-#         # define transformer
-#         ReplaceOutliers = FunctionTransformer(func=replace_outliers_1d)
-#         X_transformer = create_X_transformer()
-#         # define pipeline
-#         pipeline = Pipeline(steps=[("transform", X_transformer), 
-#                                    ("ReplaceOutliers", ReplaceOutliers), 
-#                                    ("model", model)])
-#     	# evaluate the model
-#         scores = train_single_model(X_train, y_train, pipeline)
-#         score = np.median(scores)
-#         # store results
-#         results.append(scores)
-#         print('> k=%d, MSE: %.3f' % (k, score))
 
-# randomised grid search
+# exhaustive grid search
 # 10-fold cross-validation
 # negative mean squared error
 def grid_search(X, y, model, grid):
@@ -241,19 +197,3 @@ def grid_search(X, y, model, grid):
                           scoring="neg_mean_squared_error",
                           verbose=0).fit(X, y)
     return search.best_params_, search.best_score_
-
-# # no outlier replacement
-# def grid_search2(X, y, model, grid):
-#     X_transformer = create_X_transformer2()
-#     pipe = Pipeline(steps=[("transform", X_transformer), 
-#                            ("model", model)])
-    
-#     # Random search of parameters, using 10-fold cross validation, 
-#     # search across 10 different combinations
-#     search = GridSearchCV(estimator=pipe, 
-#                           param_distributions=grid, 
-#                           cv=KFold(n_splits=10),
-#                           scoring="neg_mean_squared_error",
-#                           verbose=0, 
-#                           random_state=42).fit(X, y)
-#     return search.best_params_, search.best_score_
