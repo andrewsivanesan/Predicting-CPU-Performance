@@ -5,9 +5,9 @@
 * Data for this project is available in text format - **MachineData.txt**
 * Exploratory data analysis can be found in **CPUPerformance_EDA.py.** Plots are saved in the EDA plots folder of this repository.
 * Main modelling work carried out in the following scripts
-*    **PredictingCPUPerformance.py** (helper functions from **CustomFuncs_CPU.py**)
-*    **PredictingCPUPerformance_KBinsPRP.py** (helper functions from **CustomFuncs_CPU_KBins.py**)
-*    **PredictingCPUPerformance_FeatureEngineering.py** (helper functions from **CustomFuncs_CPU_KBins.py**)
+    * **PredictingCPUPerformance.py** (helper functions from **CustomFuncs_CPU.py**)
+    * **PredictingCPUPerformance_KBinsPRP.py** (helper functions from **CustomFuncs_CPU_KBins.py**)
+    * **PredictingCPUPerformance_FeatureEngineering.py** (helper functions from **CustomFuncs_CPU_KBins.py**)
 * Directory file paths in the above scripts point to my local C drive. If running the scripts on your own computer please **change the file paths** accordingly.
 
 ## Executive summary
@@ -17,7 +17,7 @@ The aforementioned model has a mean squared error (MSE) of **2,714** on the test
 
 A single explanatory variable - PRP - was used due to the **strong correlation between all other explanatory variables.**
 
-Feature engineering - namely k-bins discretisation and the inclusion of minimum, median and maximum PRP values by vendor - did not improve model performance beyond that of the model described above.
+Feature engineering - namely **k-bins discretisation** and the inclusion of **minimum, median and maximum PRP values by vendor** - did not improve model performance beyond that of the model described above.
 
 If additional time were available the following could be explored in pursuit of a more performant model:
 
@@ -33,17 +33,18 @@ Such a model would reduce the need for physical experiments to verify CPU manufa
 The data is sourced from https://archive.ics.uci.edu/ml/datasets/Computer+Hardware.
 
 ERP is a continuous variable, so this is a regression problem. Therefore the following models are explored in this project:
-    * linear regression
-    * k-nearest neighbours regressor
-    * support vector regression
-    * decision tree regressor
-    * random forest regressor
-    * Theil-Sen regression
-    * Huber regression
-    * Ridge regression
-    * RANSAC regression
-    * AdaBoost regressor
-    * Bagging regressor
-    * Gradient boosting regressor
+
+ * linear regression
+ * k-nearest neighbours regressor
+ * support vector regression
+ * decision tree regressor
+ * random forest regressor
+ * Theil-Sen regression
+ * Huber regression
+ * Ridge regression
+ * RANSAC regression
+ * AdaBoost regressor
+ * Bagging regressor
+ * Gradient boosting regressor
     
 Performance is measured using **mean squared error**, and benchmarked against the performance of a naive mean prediction model (MSE of **51,850**).
