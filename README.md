@@ -2,7 +2,7 @@
 
 ## General notes
 
-* Data for this project available in text format - **MachineData.txt**
+* Data for this project is available in text format - **MachineData.txt**
 * Exploratory data analysis can be found in **CPUPerformance_EDA.py.** Plots are saved in the EDA plots folder of this repository.
 * Main modelling work carried out in the following scripts
 *    **PredictingCPUPerformance.py** (helper functions from **CustomFuncs_CPU.py**)
