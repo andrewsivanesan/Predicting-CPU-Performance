@@ -120,8 +120,3 @@ plt.savefig("CorrelationHeatMap.png")
 #   - PRP and ERP
 
 # We could therefore begin by using PRP as the sole predictor in our model
-
-# calculate mean squared error of naive mean prediciton model (benchmark)
-# FixMe(20210503) - fit this model on training set rather than whole dataset
-naive_mean_predictions = np.repeat(np.mean(df["ERP"]), 209)
-MSE = np.mean((naive_mean_predictions - df["ERP"]) ** 2)
