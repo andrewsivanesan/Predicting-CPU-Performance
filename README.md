@@ -1,4 +1,4 @@
-# Predicting-CPU-Performance
+# Predicting CPU performance
 
 ## General notes
 
